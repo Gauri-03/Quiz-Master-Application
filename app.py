@@ -55,5 +55,5 @@ app.register_blueprint(user, url_prefix = "/")
 app.register_blueprint(api, url_prefix = "/")
 app.register_blueprint(stats, url_prefix = "/")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
