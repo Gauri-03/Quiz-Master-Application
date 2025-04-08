@@ -1,0 +1,164 @@
+{% extends "base.html" %} {% block head %}{% endblock %} {% block title %}Admin
+Home{% endblock %} {% block content %}
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4 class="section-title">Existing Subjects</h4>
+      <div class="row subjects-container">
+        {% for subject in subjects %}
+        <div class="col-md-4 col-sm-6 mb-4 card-wrapper">
+          <div class="card subject-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ subject.name }}</h5>
+              <p class="card-text">{{ subject.description }}</p>
+
+              <div class="card-actions">
+                <button
+                  type="button"
+                  class="btn btn-edit"
+                  data-toggle="modal"
+                  data-target="#editSubjectModal{{ subject.id }}"
+                >
+                  Edit
+                </button>
+
+                <a
+                  class="btn btn-chapters"
+                  href="/adminhome/view_chapters/{{ subject.id }}"
+                >
+                  Chapters
+                </a>
+
+                <form
+                  method="POST"
+                  action="{{ url_for('admin.delete_subject', subject_id=subject.id) }}"
+                  class="d-inline"
+                  onsubmit="return confirm('Are you sure you want to delete this subject?');"
+                >
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="modal fade"
+            id="editSubjectModal{{ subject.id }}"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="editSubjectModalTitle{{ subject.id }}"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    class="modal-title"
+                    id="editSubjectModalTitle{{ subject.id }}"
+                  >
+                    Update Existing Subject
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    method="POST"
+                    action="{{ url_for('admin.update_subject', subject_id=subject.id) }}"
+                  >
+                    <div class="form-group">
+                      <label for="name{{ subject.id }}"
+                        >Update Subject Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name{{ subject.id }}"
+                        name="name"
+                        value="{{ subject.name }}"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="description{{ subject.id }}"
+                        >Update Subject Description</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="description{{ subject.id }}"
+                        name="description"
+                        value="{{ subject.description }}"
+                        required
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card create-subject-card">
+        <div class="card-body">
+          <h4 class="card-title text-center">Create New Subject</h4>
+          <form method="POST" action="{{ url_for('admin.create_subject') }}">
+            <div class="form-group">
+              <label for="name">Subject Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter subject name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Subject Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                placeholder="Enter subject description"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>
+{% endblock %}

@@ -1,0 +1,253 @@
+{% extends "base.html" %} {% block title %} {{quiz.name}} {{quiz.description}}
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <br />
+      <h4 class="section-title">Quiz Questions</h4>
+      <div class="row subjects-container">
+        {% for question in questions %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card subject-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ question.statement }}</h5>
+              <div class="card-actions">
+                <button
+                  type="button"
+                  class="btn btn-edit"
+                  data-toggle="modal"
+                  data-target="#editQuestionModal{{ question.id }}"
+                >
+                  Edit
+                </button>
+                <form
+                  method="POST"
+                  action="{{ url_for('admin.delete_question', subject_id=subject.id, chapter_id=chapter.id, quiz_id=quiz.id, question_id=question.id) }}"
+                  onsubmit="return confirm('Are you sure you want to delete this question?');"
+                >
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </div>
+              <div class="options mt-3">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  style="background-color: #36b9cc"
+                >
+                  {{ question.option_a }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  style="background-color: #36b9cc"
+                >
+                  {{ question.option_b }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  style="background-color: #36b9cc"
+                >
+                  {{ question.option_c }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  style="background-color: #36b9cc"
+                >
+                  {{ question.option_d }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="modal fade"
+          id="editQuestionModal{{ question.id }}"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="editQuestionModalLabel{{ question.id }}"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5
+                  class="modal-title"
+                  id="editQuestionModalLabel{{ question.id }}"
+                >
+                  Edit Question
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form
+                  method="POST"
+                  action="{{ url_for('admin.update_question', subject_id=subject.id, chapter_id=chapter.id, quiz_id=quiz.id, question_id=question.id) }}"
+                >
+                  <div class="form-group">
+                    <label for="statement">Question Statement</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="statement"
+                      value="{{ question.statement }}"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="optiona">Option A</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="optiona"
+                      value="{{ question.option_a }}"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="optionb">Option B</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="optionb"
+                      value="{{ question.option_b }}"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="optionc">Option C</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="optionc"
+                      value="{{ question.option_c }}"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="optiond">Option D</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="optiond"
+                      value="{{ question.option_d }}"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="correct_answer">Correct Answer</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="correct_answer"
+                      value="{{ question.correct_answer }}"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-edit">
+                    Save Changes
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card create-subject-card">
+        <div class="card-body">
+          <h4 class="text-center card-title">Create New Question</h4>
+          <form
+            method="POST"
+            action="{{ url_for('admin.create_question', subject_id=subject.id, chapter_id=chapter.id, quiz_id=quiz.id) }}"
+          >
+            <div class="form-group">
+              <label for="statement">Question Statement</label>
+              <input
+                type="text"
+                class="form-control"
+                id="statement"
+                name="statement"
+                placeholder="Enter question statement"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="optiona">Option A</label>
+              <input
+                type="text"
+                class="form-control"
+                id="optiona"
+                name="optiona"
+                placeholder="Enter option A"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="optionb">Option B</label>
+              <input
+                type="text"
+                class="form-control"
+                id="optionb"
+                name="optionb"
+                placeholder="Enter option B"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="optionc">Option C</label>
+              <input
+                type="text"
+                class="form-control"
+                id="optionc"
+                name="optionc"
+                placeholder="Enter option C"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="optiond">Option D</label>
+              <input
+                type="text"
+                class="form-control"
+                id="optiond"
+                name="optiond"
+                placeholder="Enter option D"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="correct_answer">Correct Answer</label>
+              <input
+                type="text"
+                class="form-control"
+                id="correct_answer"
+                name="correct_answer"
+                placeholder="Enter the correct answer"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>
+{% endblock %}

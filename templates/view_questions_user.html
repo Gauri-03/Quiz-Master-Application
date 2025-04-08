@@ -1,0 +1,100 @@
+{% extends "base.html" %} {% block title %} Take Quiz {% endblock %} {% block
+navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <a class="navbar-brand brand-logo" href="/userhome/{{ user_id }}"
+    >Quiz Master</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbar"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbar">
+    <div class="navbar-nav">
+      {% block navlinks %}
+      <a class="nav-item nav-link" href="/userhome/{{ user_id }}">Home</a>
+      <a class="nav-item nav-link" href="/userhome/{{ user_id }}">Subjects</a>
+
+      <a class="nav-item nav-link" href="/userhome/{{ user_id }}/stats"
+        >Stats</a
+      >
+      <a class="nav-item nav-link logout-btn" href="/">Logout</a>
+      {% endblock %}
+    </div>
+  </div>
+</nav>
+{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h4 class="section-title text-center">Take Your Quiz</h4>
+  <div class="quiz-container p-4">
+    <form
+      method="POST"
+      action="{{ url_for('user.submit_quiz', quiz_id=quiz.id, user_id=user_id) }}"
+    >
+      {% for question in questions %}
+      <div class="question-card mb-4 p-3">
+        <h5 class="question-text">{{ question.statement }}</h5>
+        <div class="options-container">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="option_a_{{question.id}}"
+              name="question_{{question.id}}"
+              value="{{question.option_a}}"
+            />
+            <label class="form-check-label" for="option_a_{{question.id}}"
+              >{{ question.option_a }}</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="option_b_{{question.id}}"
+              name="question_{{question.id}}"
+              value="{{question.option_b}}"
+            />
+            <label class="form-check-label" for="option_b_{{question.id}}"
+              >{{ question.option_b }}</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="option_c_{{question.id}}"
+              name="question_{{question.id}}"
+              value="{{question.option_c}}"
+            />
+            <label class="form-check-label" for="option_c_{{question.id}}"
+              >{{ question.option_c }}</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="option_d_{{question.id}}"
+              name="question_{{question.id}}"
+              value="{{question.option_d}}"
+            />
+            <label class="form-check-label" for="option_d_{{question.id}}"
+              >{{ question.option_d }}</label
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg">
+          Submit Quiz
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

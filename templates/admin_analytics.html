@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block title %} Admin Analytics {% endblock %} {%
+block content %}
+<div class="container mt-4">
+  <h1 class="text-center">Admin Dashboard</h1>
+
+  <div class="text-center">
+    <a
+      class="btn text-white me-2"
+      style="background-color: #001f3f"
+      href="/api/subjects"
+      >View Subjects in JSON</a
+    >
+    <a
+      class="btn text-white me-2"
+      style="background-color: #001f3f"
+      href="/api/chapters"
+      >View Chapters in JSON</a
+    >
+    <a
+      class="btn text-white"
+      style="background-color: #001f3f"
+      href="/api/quizzes"
+      >View Quizzes in JSON</a
+    >
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card text-white" style="background-color: #4e73df">
+        <div class="card-body text-center">
+          <h5 class="card-title">Total Users</h5>
+          <p class="card-text display-4">{{ total_users }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card text-white" style="background-color: #36b9cc">
+        <div class="card-body text-center">
+          <h5 class="card-title">Best Performing User</h5>
+          <p class="card-text display-4">{{ best_user }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card text-white" style="background-color: #e74a3b">
+        <div class="card-body text-center">
+          <h5 class="card-title">Weakest Performing User</h5>
+          <p class="card-text display-4">{{ worst_user }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body text-center">
+          <h5 class="card-title">Most Popular Subject</h5>
+          <p class="card-text display-4">{{ most_popular_subject }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="text-center mt-4">User Performance Overview</h2>
+  <table
+    class="table table-bordered table-hover text-center"
+    style="background-color: #f8f9fc; border-color: #001f3f"
+  >
+    <thead class="table-dark" style="background-color: #001f3f">
+      <tr>
+        <th>User</th>
+        <th>Average Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user, avg_score in user_avg_scores.items() %}
+      <tr>
+        <td>{{ user }}</td>
+        <td>{{ avg_score }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="2" class="text-muted">No data available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br />
+  <br />
+</div>
+{% endblock %}

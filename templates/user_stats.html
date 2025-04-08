@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% block title %}User Stats{% endblock %} {% block
+navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <a class="navbar-brand brand-logo" href="/userhome/{{ user.id }}"
+    >Quiz Master</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbar"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbar">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/userhome/{{ user.id }}">Home</a>
+      <a class="nav-item nav-link" href="/userhome/{{ user.id }}">Subjects</a>
+      <a class="nav-item nav-link active" href="/userhome/{{ user.id }}/stats"
+        >Stats</a
+      >
+      <a class="nav-item nav-link logout-btn" href="/">Logout</a>
+    </div>
+  </div>
+</nav>
+{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h1 class="text-center section-title">User Stats</h1>
+  <h2 class="text-center text">{{ user.username }}</h2>
+  <p class="text-center stats-summary">
+    <strong>Total Quizzes Taken:</strong> {{ quiz_count }}
+  </p>
+  <div class="stats-highlight d-flex justify-content-center">
+    <h4 class="text-success px-3">
+      Best Subject:
+      <strong>{{ best_subject if best_subject else 'N/A' }}</strong>
+    </h4>
+    <h4 class="text-danger px-3">
+      Weakest Subject:
+      <strong>{{ weakest_subject if weakest_subject else 'N/A' }}</strong>
+    </h4>
+  </div>
+
+  <div class="table-responsive mt-4">
+    <h3 class="text-center">Subject-Wise Average Scores</h3>
+    <table class="table table-bordered table-hover text-center">
+      <thead class="table-dark" style="background-color: #081c3c; color: white">
+        <tr>
+          <th>Subject</th>
+          <th>Average Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject, avg_score in subject_avg_scores.items() %}
+        <tr>
+          <td>{{ subject }}</td>
+          <td><strong>{{ avg_score }}</strong></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="2" class="text-muted">
+            No subject-wise scores available.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-responsive mt-4">
+    <h3 class="text-center">Latest Quiz Scores</h3>
+    <table class="table table-bordered table-hover text-center">
+      <thead class="table-dark" style="background-color: #081c3c; color: white">
+        <tr>
+          <th>Subject</th>
+          <th>Chapter</th>
+          <th>Quiz</th>
+          <th>Latest Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for quiz in quiz_data %}
+        <tr>
+          <td>{{ quiz.subject_name }}</td>
+          <td>{{ quiz.chapter_name }}</td>
+          <td>{{ quiz.quiz_name }}</td>
+          <td><strong>{{ quiz.latest_score }}</strong></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" class="text-muted">No quiz records found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,254 @@
+/* Prevent content shift when modal opens */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Reduce modal animation and ensure smooth transitions */
+.modal.fade .modal-dialog {
+  transition: transform 0.2s ease-out;
+  transform: translate(0, -20px);
+  opacity: 0;
+}
+
+.modal.show .modal-dialog {
+  transform: none;
+  opacity: 1;
+}
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem);
+}
+
+/* Prevent scrollbar issues */
+@media (min-width: 576px) {
+  .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+}
+
+/* Additional stability for modals */
+.modal-backdrop {
+  opacity: 0.5;
+}
+
+/* Ensure form inputs don't cause unexpected shifts */
+.modal-body input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+Smooth backdrop transition */ .modal-backdrop {
+  transition: opacity 0.2s linear;
+}
+
+/* Admin Home Styles */
+.section-title {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.75rem;
+}
+
+.subjects-container {
+  margin-bottom: 2rem;
+}
+
+.subject-card {
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.subject-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.subject-card .card-title {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.subject-card .card-text {
+  color: #666;
+  margin-bottom: 1.5rem;
+  min-height: 3rem;
+}
+
+/* Updated card actions styling */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Make buttons bigger and aligned */
+.card-actions .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  flex: 1;
+  margin: 0 0.25rem;
+  text-align: center;
+}
+
+/* Remove the btn-sm class styling */
+.btn-sm {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
+/* First button in row should have no left margin */
+.card-actions .btn:first-child {
+  margin-left: 0;
+}
+
+/* Last button in row should have no right margin */
+.card-actions .btn:last-child {
+  margin-right: 0;
+}
+
+/* Make form display inline-block to not disrupt flex layout */
+.card-actions form {
+  flex: 1;
+  margin: 0 0.25rem;
+}
+
+/* Make delete button fill its container */
+.card-actions form .btn {
+  width: 100%;
+  margin: 0;
+}
+
+.btn-edit {
+  background-color: #4e73df;
+  color: white;
+}
+
+.btn-chapters {
+  background-color: #36b9cc;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #e74a3b;
+  color: white;
+}
+
+.btn-edit:hover,
+.btn-chapters:hover,
+.btn-delete:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+.create-subject-card {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border-left: 4px solid #4e73df;
+}
+
+.create-subject-card .card-title {
+  color: #4e73df;
+  margin-bottom: 1.5rem;
+}
+
+.create-subject-card .btn-primary {
+  background-color: #4e73df;
+  border-color: #4e73df;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.create-subject-card .btn-primary:hover {
+  background-color: #3a5fc8;
+  border-color: #3a5fc8;
+}
+
+.modal-content {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.modal-title {
+  color: #4e73df;
+  font-weight: 600;
+}
+
+body {
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #343a40;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.user-stats {
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.table-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.custom-table {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.custom-table thead {
+  background: #001f3f;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table tbody tr:hover {
+  background: #f1f1f1;
+}

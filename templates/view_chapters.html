@@ -1,0 +1,167 @@
+{% extends "base.html" %} {% block head %}{% endblock %} {% block title
+%}Chapters{% endblock %} {% block content %}
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4 class="section-title">Existing Chapters</h4>
+      <div class="row subjects-container">
+        {% for chapter in chapters %}
+        <div class="col-md-4 col-sm-6 mb-4 card-wrapper">
+          <div class="card subject-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ chapter.name }}</h5>
+              <p class="card-text">{{ chapter.description }}</p>
+
+              <div class="card-actions">
+                <button
+                  type="button"
+                  class="btn btn-edit"
+                  data-toggle="modal"
+                  data-target="#editChapterModal{{ chapter.id }}"
+                >
+                  Edit
+                </button>
+
+                <a
+                  class="btn btn-chapters"
+                  href="/adminhome/view_quiz/{{ subject.id }}/{{ chapter.id }}"
+                >
+                  View Quiz
+                </a>
+
+                <form
+                  method="POST"
+                  action="{{ url_for('admin.delete_chapter', subject_id=subject.id, chapter_id=chapter.id) }}"
+                  class="d-inline"
+                  onsubmit="return confirm('Are you sure you want to delete this chapter?');"
+                >
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="modal fade"
+            id="editChapterModal{{ chapter.id }}"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="editChapterModalTitle{{ chapter.id }}"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    class="modal-title"
+                    id="editChapterModalTitle{{ chapter.id }}"
+                  >
+                    Update Existing Chapter
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    method="POST"
+                    action="{{ url_for('admin.update_chapter', subject_id=subject.id, chapter_id=chapter.id) }}"
+                  >
+                    <div class="form-group">
+                      <label for="name{{ chapter.id }}"
+                        >Update Chapter Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name{{ chapter.id }}"
+                        name="name"
+                        value="{{ chapter.name }}"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="description{{ chapter.id }}"
+                        >Update Chapter Description</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="description{{ chapter.id }}"
+                        name="description"
+                        value="{{ chapter.description }}"
+                        required
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card create-subject-card">
+        <div class="card-body">
+          <h4 class="card-title text-center">Create New Chapter</h4>
+          <form
+            method="POST"
+            action="{{ url_for('admin.create_chapter', subject_id=subject.id) }}"
+          >
+            <div class="form-group">
+              <label for="name">Chapter Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter chapter name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Chapter Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                placeholder="Enter chapter description"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>
+{% endblock %}

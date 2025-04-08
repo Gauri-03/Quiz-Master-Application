@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block title %}Admin Search{% endblock %} {% block
+content %}
+
+<div class="container mt-5">
+  <h4 class="section-title text-center">Admin Search</h4>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card create-subject-card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Search for Data</h5>
+          <form method="POST" action="{{ url_for('admin.search') }}">
+            <div class="form-group">
+              <label for="search">Search Query</label>
+              <input
+                type="search"
+                class="form-control"
+                id="search"
+                name="search"
+                placeholder="Enter keyword"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Search By:</label>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="search_type"
+                  id="user"
+                  value="user"
+                  required
+                />
+                <label class="form-check-label" for="user">Users</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="search_type"
+                  id="subject"
+                  value="subject"
+                />
+                <label class="form-check-label" for="subject">Subjects</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

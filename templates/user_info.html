@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}User Stats{% endblock %} {% block
+content %}
+
+<div class="container mt-5">
+  <h1 class="text-center title">User Statistics</h1>
+  <h2 class="text-center username">Username: {{ user.username }}</h2>
+
+  <div class="user-stats">
+    <p><strong>Total Quizzes Taken:</strong> {{ quiz_count }}</p>
+
+    <h4 class="text-success">
+      Best Subject:
+      <strong>{{ best_subject if best_subject else 'N/A' }}</strong>
+    </h4>
+    <h4 class="text-danger">
+      Weakest Subject:
+      <strong>{{ weakest_subject if weakest_subject else 'N/A' }}</strong>
+    </h4>
+  </div>
+
+  <div class="table-container">
+    <h3 class="text-center">Subject-Wise Average Scores</h3>
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Average Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject, avg_score in subject_avg_scores.items() %}
+        <tr>
+          <td>{{ subject }}</td>
+          <td><strong>{{ avg_score }}</strong></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="2" class="text-muted">
+            No subject-wise scores available.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-container">
+    <h3 class="text-center">Latest Quiz Scores</h3>
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Chapter</th>
+          <th>Quiz</th>
+          <th>Latest Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for quiz in quiz_data %}
+        <tr>
+          <td>{{ quiz.subject_name }}</td>
+          <td>{{ quiz.chapter_name }}</td>
+          <td>{{ quiz.quiz_name }}</td>
+          <td><strong>{{ quiz.latest_score }}</strong></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" class="text-muted">No quiz records found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
