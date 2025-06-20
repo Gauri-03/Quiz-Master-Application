@@ -1,4 +1,4 @@
-# Quiz Master Application 🎯  
+# Quiz Master Application
 
 A full-stack Quiz Management Web Application built using Flask, SQLite, HTML, CSS, and Bootstrap — designed to let Admins control content and Users enjoy quizzes effortlessly.
 
@@ -6,9 +6,9 @@ A full-stack Quiz Management Web Application built using Flask, SQLite, HTML, CS
 
 ---
 
-## Features 🔥
+## Features
 
-### Admin Side (Control Panel 👑)
+### Admin Side (Control Panel)
 - CRUD Operations for:
   - Subjects
   - Chapters
@@ -23,7 +23,7 @@ A full-stack Quiz Management Web Application built using Flask, SQLite, HTML, CS
 
 ---
 
-### User Side (Quiz Mode 🎮)
+### User Side (Quiz Mode)
 - Attempt Quizzes by Subject & Chapter
 - Track:
   - Latest & Previous Scores
@@ -32,7 +32,7 @@ A full-stack Quiz Management Web Application built using Flask, SQLite, HTML, CS
 
 ---
 
-## Tech Stack 🛠️
+## Tech Stack 
 | Tech        | Purpose                         |
 |-------------|--------------------------------|
 | Flask       | Backend Framework              |
@@ -43,7 +43,7 @@ A full-stack Quiz Management Web Application built using Flask, SQLite, HTML, CS
 
 ---
 
-## How To Run Locally ⚙️
+## How To Run Locally
 
 1. Clone the Repository
 ```bash
@@ -70,7 +70,7 @@ Or skip all that and just → [Use the Live Website](https://quiz-master-applica
 
 ---
 
-## Future Improvements 🌱
+## Future Improvements
 - User Authentication
 - Quiz Timer Feature
 - Leaderboards
@@ -79,7 +79,7 @@ Or skip all that and just → [Use the Live Website](https://quiz-master-applica
 
 ---
 
-## Contributing 🤝
+## Contributing
 Open to suggestions, improvements, or feature requests. Feel free to fork & raise a PR.
 
 ---
